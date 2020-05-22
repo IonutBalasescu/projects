@@ -1,0 +1,22 @@
+BALASESCU IONUT MARIUS 333CB
+
+	TEMA2 SO - STDIO.H
+
+
+	Am folosit tehnica de buffering: pentru read citeam cat de mult din
+ prima si daca nu aveam nevoie de tot ce citeam, pastram restul in buffer. Nu a 
+fost nevoie sa resetez buferul, acesta era initializat cu 0 la inceput (calloc), dupa
+care suprascriam octeti in el. In cazul in care era nevoie sa citesc mai mult decat 
+aveam in buffer, reveneam la adresa buffer + 0 pentru a citi din nou tot ce se poate
+ in fisier. Copierea datelor am facut-o cu memcpy. Analog si pentru scriere.
+	In continuare, am avut grija sa verific potentialele erori returnate de
+unele functii.
+	Pentru cea mai importanta parte din tema, lucrul cu procese: am urmarit
+sa realizez un pipe pentru  scrierea/citirea din fisier, dintr-un proces
+copil. Dupa initierea pipe-ului, am apelat functia fork pentru crearea unui
+proces copil. Dupa ce m-am asigurat ca s-a realizat fork cu succes, am trecut la
+etapa urmatoare - am dat sarcini separate proceselor parinte&copil, pentru a
+realiza "conexiunea" de pipe, prin redirectarea file-descriptorilor, dupa
+cerinta data de apelul functiei popen (type). Dupa ce am realizat
+redirectarea(procesele tip read citesc de la iesirea standard a procesului, iar
+cele de tip write scriu la intrarea standard a procesului copil).
